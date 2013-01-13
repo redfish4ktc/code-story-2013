@@ -22,7 +22,7 @@ public class CodeStoryWebServer implements HttpHandler {
         if ("/update".equals(exchange.getRequestURI().getPath())) {
             body = "kiffe";
         } else {
-            body = "red4ktc-codestory2013@yahoo.fr ";
+            body = "red4ktc-codestory2013@yahoo.fr";
         }
 
         byte[] response = body.getBytes();

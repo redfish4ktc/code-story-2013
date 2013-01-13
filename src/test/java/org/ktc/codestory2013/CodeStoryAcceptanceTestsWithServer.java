@@ -30,7 +30,7 @@ public class CodeStoryAcceptanceTestsWithServer {
     public void return_my_email() throws Exception {
         WebRequest req = new GetMethodWebRequest("http://localhost:8090/?q=Quelle+est+ton+adresse+email");
         WebResponse resp = wc.getResponse(req);
-        assertThat(resp.getText()).isEqualTo("red4ktc-codestory2013@yahoo.fr ");
+        assertThat(resp.getText()).isEqualTo("red4ktc-codestory2013@yahoo.fr");
     }
 
 }
