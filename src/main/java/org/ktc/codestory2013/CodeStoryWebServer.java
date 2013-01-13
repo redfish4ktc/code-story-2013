@@ -37,11 +37,15 @@ public class CodeStoryWebServer implements HttpHandler {
     }
 
     private static int getServerPort() {
-        String portOnHeroku = System.getenv("PORT");
-        if (portOnHeroku == null) {
-            portOnHeroku = "5000";
+        String webPortOnHeroku = System.getenv("PORT");
+        if (isNullOrEmpty(webPortOnHeroku)) {
+            webPortOnHeroku = "5000";
         }
-        return Integer.parseInt(portOnHeroku);
+        return Integer.parseInt(webPortOnHeroku);
+    }
+
+    private static boolean isNullOrEmpty(String content) {
+        return content == null || "".equals(content);
     }
 
 }
