@@ -20,10 +20,11 @@ public class CodeStoryWebServer implements HttpHandler {
         if ("/update".equals(exchange.getRequestURI().getPath())) {
             body = "kiffe";
         } else {
-            body = "hello";
+            body = "red4ktc-codestory2013@yahoo.fr ";
         }
 
         byte[] response = body.getBytes();
+        exchange.getResponseHeaders().set("Server", "CatchMeIfYouCan");
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, response.length);
         exchange.getResponseBody().write(response);
         exchange.close();
