@@ -10,6 +10,8 @@ import java.net.InetSocketAddress;
 @SuppressWarnings("restriction")
 public class CodeStoryWebServer implements HttpHandler {
 
+    private HttpServer httpServer;
+
     public CodeStoryWebServer() {
     }
 
@@ -30,11 +32,19 @@ public class CodeStoryWebServer implements HttpHandler {
         exchange.close();
     }
 
+    public void start(int port) throws IOException {
+        httpServer = HttpServer.create(new InetSocketAddress(port), 0);
+        httpServer.createContext("/", this);
+        httpServer.start();
+    }
+
+    public void stop() {
+        httpServer.stop(0);
+    }
+
     public static void main(String[] args) throws Exception {
-        int port = getServerPort();
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/", new CodeStoryWebServer());
-        server.start();
+        CodeStoryWebServer codeStoryWebServer = new CodeStoryWebServer();
+        codeStoryWebServer.start(getServerPort());
     }
 
     private static int getServerPort() {
