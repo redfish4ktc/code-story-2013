@@ -17,12 +17,15 @@ public class CodeStoryWebServer implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        String body = "";
+        String body = "To be implemented";
 
-        if ("/update".equals(exchange.getRequestURI().getPath())) {
-            body = "kiffe";
-        } else {
-            body = "red4ktc-codestory2013@yahoo.fr";
+        String path = exchange.getRequestURI().getPath();
+        if ("/".equals(path)) {
+            body = "You must ask something if you want me to answer";
+            String question = extractQuestion(exchange);
+            if (null != question) {
+                body = "red4ktc-codestory2013@yahoo.fr";
+            }
         }
 
         byte[] response = body.getBytes();
@@ -30,6 +33,15 @@ public class CodeStoryWebServer implements HttpHandler {
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, response.length);
         exchange.getResponseBody().write(response);
         exchange.close();
+    }
+
+    private String extractQuestion(HttpExchange exchange) {
+        String uriQuery = exchange.getRequestURI().getQuery();
+        System.out.println("uri query: " + uriQuery);
+        if (null != uriQuery) {
+            return uriQuery.split("q=")[1];
+        }
+        return null;
     }
 
     public void start(int port) throws IOException {
